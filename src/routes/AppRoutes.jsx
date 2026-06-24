@@ -8,14 +8,15 @@ import Signup from "../features/auth/pages/Signup";
 import ForgotPassword from "../features/auth/pages/ForgotPassword";
 import ResetPassword from "../features/auth/pages/ResetPassword";
 import Dashboard from "../features/dashboard/pages/Dashboard";
+import DemoList from "../features/demo/DemoList";
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
 
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
+      {/* Public auth paths */}
       <Routes>
-        {/* Public auth paths */}
         <Route
           element={
             <PublicRoute>
@@ -39,21 +40,14 @@ export const AppRoutes = () => {
         >
           <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
           
+          <Route path="/masters" element={<DemoList />} />
+          
           <Route
             path="/settings"
             element={
               <div className="card p-4 bg-body border shadow-sm">
                 <h4 className="fw-bold mb-2">Settings Console</h4>
                 <p className="text-muted mb-0">Centralized system variables and configurations.</p>
-              </div>
-            }
-          />
-          <Route
-            path="/masters"
-            element={
-              <div className="card p-4 bg-body border shadow-sm">
-                <h4 className="fw-bold mb-2">Masters Setup</h4>
-                <p className="text-muted mb-0">Add, edit, or remove lookup dictionary masters.</p>
               </div>
             }
           />

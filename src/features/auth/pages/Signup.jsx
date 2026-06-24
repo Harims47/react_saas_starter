@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { appConfig } from "../../../config/appConfig";
 import { ROUTES } from "../../../constants/routes";
+import AppInput from "../../../components/common/AppInput";
+import AppButton from "../../../components/common/AppButton";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ export const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,10 +32,16 @@ export const Signup = () => {
       return;
     }
 
-    setSuccess(true);
+    setLoading(true);
+
+    // Mock API delay
     setTimeout(() => {
-      navigate(ROUTES.LOGIN);
-    }, 1500);
+      setLoading(false);
+      setSuccess(true);
+      setTimeout(() => {
+        navigate(ROUTES.LOGIN);
+      }, 1500);
+    }, 1000);
   };
 
   return (
@@ -65,124 +74,71 @@ export const Signup = () => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div className="row g-2 mb-3">
+        <div className="row g-2 mb-0">
           <div className="col-6">
-            <label htmlFor="firstNameInput" className="form-label small fw-medium">
-              First Name
-            </label>
-            <div className="position-relative">
-              <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-                <i className="bi bi-person"></i>
-              </span>
-              <input
-                type="text"
-                className="form-control ps-5 py-2"
-                id="firstNameInput"
-                placeholder="John"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-              />
-            </div>
+            <AppInput
+              label="First Name"
+              placeholder="John"
+              type="text"
+              icon="bi-person"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              disabled={loading || success}
+            />
           </div>
           <div className="col-6">
-            <label htmlFor="lastNameInput" className="form-label small fw-medium">
-              Last Name
-            </label>
-            <div className="position-relative">
-              <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-                <i className="bi bi-person"></i>
-              </span>
-              <input
-                type="text"
-                className="form-control ps-5 py-2"
-                id="lastNameInput"
-                placeholder="Doe"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="signupEmailInput" className="form-label small fw-medium">
-            Email Address
-          </label>
-          <div className="position-relative">
-            <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-              <i className="bi bi-envelope"></i>
-            </span>
-            <input
-              type="email"
-              className="form-control ps-5 py-2"
-              id="signupEmailInput"
-              placeholder="name@company.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+            <AppInput
+              label="Last Name"
+              placeholder="Doe"
+              type="text"
+              icon="bi-person"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               required
+              disabled={loading || success}
             />
           </div>
         </div>
 
-        <div className="mb-3">
-          <label htmlFor="signupPasswordInput" className="form-label small fw-medium">
-            Password
-          </label>
-          <div className="position-relative">
-            <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-              <i className="bi bi-lock"></i>
-            </span>
-            <input
-              type={showPassword ? "text" : "password"}
-              className="form-control px-5 py-2"
-              id="signupPasswordInput"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              className="btn position-absolute top-50 end-0 translate-middle-y pe-3 border-0 bg-transparent text-muted"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              <i className={`bi bi-${showPassword ? "eye-slash" : "eye"}`}></i>
-            </button>
-          </div>
-        </div>
+        <AppInput
+          label="Email Address"
+          placeholder="name@company.com"
+          type="email"
+          icon="bi-envelope"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          disabled={loading || success}
+        />
 
-        <div className="mb-4">
-          <label htmlFor="confirmPasswordInput" className="form-label small fw-medium">
-            Confirm Password
-          </label>
-          <div className="position-relative">
-            <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-              <i className="bi bi-lock-fill"></i>
-            </span>
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              className="form-control px-5 py-2"
-              id="confirmPasswordInput"
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              className="btn position-absolute top-50 end-0 translate-middle-y pe-3 border-0 bg-transparent text-muted"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              <i className={`bi bi-${showConfirmPassword ? "eye-slash" : "eye"}`}></i>
-            </button>
-          </div>
-        </div>
+        <AppInput
+          label="Password"
+          placeholder="••••••••"
+          type="password"
+          icon="bi-lock"
+          showPasswordToggle={true}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          disabled={loading || success}
+        />
 
-        <button type="submit" className="btn btn-primary w-100 py-2 fw-semibold mb-4">
+        <AppInput
+          label="Confirm Password"
+          placeholder="••••••••"
+          type="password"
+          icon="bi-lock-fill"
+          showPasswordToggle={true}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          disabled={loading || success}
+        />
+
+        <AppButton type="submit" fullWidth={true} loading={loading} disabled={success} className="py-2 mb-4">
           Create Account
-        </button>
+        </AppButton>
       </form>
 
       {/* Footer Link */}

@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { appConfig } from "../../../config/appConfig";
 import { ROUTES } from "../../../constants/routes";
+import AppInput from "../../../components/common/AppInput";
+import AppButton from "../../../components/common/AppButton";
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSuccess(true);
+    setLoading(true);
+
+    // Mock API delay
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(true);
+    }, 1000);
   };
 
   return (
@@ -42,32 +51,23 @@ export const ForgotPassword = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="forgotEmailInput" className="form-label small fw-medium">
-              Email Address
-            </label>
-            <div className="position-relative">
-              <span className="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
-                <i className="bi bi-envelope"></i>
-              </span>
-              <input
-                type="email"
-                className="form-control ps-5 py-2"
-                id="forgotEmailInput"
-                placeholder="name@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-          </div>
+          <AppInput
+            label="Email Address"
+            placeholder="name@company.com"
+            type="email"
+            icon="bi-envelope"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={loading}
+          />
 
-          <button type="submit" className="btn btn-primary w-100 py-2 fw-semibold mb-4">
+          <AppButton type="submit" fullWidth={true} loading={loading} className="py-2 mb-4">
             Send Reset Link
-          </button>
+          </AppButton>
           
           <div className="text-center">
-            <Link to={ROUTES.ROUTES || ROUTES.LOGIN} className="small text-decoration-none fw-semibold">
+            <Link to={ROUTES.LOGIN} className="small text-decoration-none fw-semibold">
               Back to Login
             </Link>
           </div>
