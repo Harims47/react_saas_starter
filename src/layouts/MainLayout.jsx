@@ -29,6 +29,7 @@ export const MainLayout = () => {
 
       <div className="main-container">
         <Topbar
+          collapsed={sidebarCollapsed}
           onToggleSidebar={handleToggleSidebar}
           onToggleMobileSidebar={handleToggleMobileSidebar}
         />

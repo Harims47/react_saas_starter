@@ -42,7 +42,7 @@ export const ProfileDropdown = () => {
         </span>
       </button>
       <ul
-        className="dropdown-menu dropdown-menu-end shadow-sm border mt-2"
+        className="dropdown-menu dropdown-menu-end profile-dropdown-menu shadow border mt-2"
         aria-labelledby="profileDropdown"
       >
         <li className="px-3 py-2 border-bottom">

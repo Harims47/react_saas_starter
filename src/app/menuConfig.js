@@ -11,16 +11,31 @@ export const menuConfig = [
     roles: [ROLES.SUPER_ADMIN, ROLES.ADMIN, ROLES.USER],
   },
   {
-    title: "Masters",
-    path: "/masters",
-    icon: "bi-collection-fill",
+    section: "Academic Registry",
     roles: [ROLES.SUPER_ADMIN, ROLES.ADMIN],
+    items: [
+      {
+        title: "Masters & Catalog",
+        icon: "bi-collection-fill",
+        roles: [ROLES.SUPER_ADMIN, ROLES.ADMIN],
+        children: [
+
+          { title: "Settings Console", path: "/settings", icon: "bi-circle-fill" },
+        ],
+      },
+    ],
   },
   {
-    title: "Settings",
-    path: "/settings",
-    icon: "bi-gear-fill",
+    section: "Admin Console",
     roles: [ROLES.SUPER_ADMIN, ROLES.ADMIN],
+    items: [
+      {
+        title: "System Configuration",
+        path: "/settings",
+        icon: "bi-gear-fill",
+        roles: [ROLES.SUPER_ADMIN, ROLES.ADMIN],
+      },
+    ],
   },
 ];
 

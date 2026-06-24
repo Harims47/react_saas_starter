@@ -5,7 +5,7 @@ export const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid px-0">
       <div className="row g-4">
         {/* Welcome Card */}
         <div className="col-12">

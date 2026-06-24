@@ -13,7 +13,7 @@ export const DetailsPageTemplate = ({
   children,
 }) => {
   return (
-    <div className="container-fluid py-2">
+    <div className="container-fluid py-2 px-0">
       {/* Page Header */}
       <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-3 mb-4">
         <div>

@@ -67,6 +67,44 @@ export const DemoList = () => {
     currentPage * itemsPerPage
   );
 
+  // Dynamic KPI Card calculations
+  const totalBudgetVal = mockRecords.reduce((sum, rec) => {
+    const num = parseInt(rec.budget.replace(/[^0-9]/g, ""), 10);
+    return sum + num;
+  }, 0);
+  const formattedBudget = `$${totalBudgetVal.toLocaleString()}`;
+
+  const kpis = [
+    {
+      title: "Total Modules",
+      value: `${mockRecords.length} System modules`,
+      icon: "bi-collection-fill",
+      bgClass: "bg-primary bg-opacity-10",
+      color: "text-primary",
+    },
+    {
+      title: "Active Modules",
+      value: `${mockRecords.filter(r => r.status === "Active").length} Operational`,
+      icon: "bi-check-circle-fill",
+      bgClass: "bg-success bg-opacity-10",
+      color: "text-success",
+    },
+    {
+      title: "Draft Configuration",
+      value: `${mockRecords.filter(r => r.status === "Draft").length} Pending approval`,
+      icon: "bi-hourglass-split",
+      bgClass: "bg-warning bg-opacity-10",
+      color: "text-warning",
+    },
+    {
+      title: "Cumulative Budget",
+      value: formattedBudget,
+      icon: "bi-wallet2",
+      bgClass: "bg-info bg-opacity-10",
+      color: "text-info",
+    },
+  ];
+
   const columns = [
     { header: "Module Code", accessor: "code", sortable: true },
     { header: "Module Name", accessor: "name", sortable: true },
@@ -77,8 +115,16 @@ export const DemoList = () => {
       accessor: "status",
       sortable: true,
       render: (row) => {
-        const bg = row.status === "Active" ? "success" : row.status === "Draft" ? "warning" : "secondary";
-        return <span className={`badge bg-${bg}`}>{row.status}</span>;
+        const status = row.status;
+        const bg = status === "Active" ? "success" : status === "Draft" ? "warning" : "secondary";
+        return (
+          <span 
+            className={`badge bg-${bg} bg-opacity-10 text-${bg} rounded-pill border border-${bg} border-opacity-10 px-2.5 py-1.5`}
+            style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.02em" }}
+          >
+            {status}
+          </span>
+        );
       },
     },
   ];
@@ -104,7 +150,7 @@ export const DemoList = () => {
 
   const renderFilterSection = () => (
     <div className="d-flex align-items-center gap-2">
-      <select className="form-select form-select-sm" style={{ width: "120px" }} aria-label="Status filter">
+      <select className="form-select form-select-sm" style={{ width: "130px", fontSize: "0.85rem", height: "38px" }} aria-label="Status filter">
         <option value="">All Statuses</option>
         <option value="Active">Active</option>
         <option value="Draft">Draft</option>
@@ -114,8 +160,8 @@ export const DemoList = () => {
 
   return (
     <ListPageTemplate
-      title="SaaS Module Masters"
-      subtitle="Demo list to verify AppTable search, sorting, pagination, and action events."
+      title="SaaS Module Catalog"
+      subtitle="Comprehensive list representing live modules deployed across ERP, CRM, Clinic, and HRMS tenants."
       createButtonText="Add Module"
       onCreateClick={() => alert("Create template trigger callback")}
       searchQuery={searchQuery}
@@ -133,6 +179,7 @@ export const DemoList = () => {
       itemsPerPage={itemsPerPage}
       onPageChange={setCurrentPage}
       emptyMessage="No matching modules found."
+      kpis={kpis}
     />
   );
 };

@@ -23,8 +23,8 @@ export const AppTable = ({
       {loading && <AppLoader type="overlay" message="Updating records..." />}
 
       <div className="table-responsive">
-        <table className="table table-hover align-middle mb-0" style={{ fontSize: "0.9rem" }}>
-          <thead className="table-light">
+        <table className="table table-hover align-middle mb-0" style={{ fontSize: "0.875rem" }}>
+          <thead>
             <tr>
               {columns.map((col, index) => {
                 const isSortable = col.sortable;
@@ -36,20 +36,20 @@ export const AppTable = ({
                     scope="col"
                     onClick={() => handleSortClick(col)}
                     style={{ cursor: isSortable ? "pointer" : "default", whiteSpace: "nowrap" }}
-                    className="py-3 px-4 text-muted fw-semibold"
+                    className="py-3 px-4"
                   >
                     <div className="d-flex align-items-center">
                       <span>{col.header}</span>
                       {isSortable && (
-                        <span className="ms-1 text-muted opacity-50">
+                        <span className="ms-1">
                           {isCurrentSort ? (
                             sortOrder === "asc" ? (
-                              <i className="bi bi-arrow-up text-primary opacity-100"></i>
+                              <i className="bi bi-arrow-up sort-indicator sort-indicator-active"></i>
                             ) : (
-                              <i className="bi bi-arrow-down text-primary opacity-100"></i>
+                              <i className="bi bi-arrow-down sort-indicator sort-indicator-active"></i>
                             )
                           ) : (
-                            <i className="bi bi-arrow-down-up small"></i>
+                            <i className="bi bi-arrow-down-up sort-indicator opacity-50"></i>
                           )}
                         </span>
                       )}
@@ -57,7 +57,7 @@ export const AppTable = ({
                   </th>
                 );
               })}
-              {actions && <th scope="col" className="py-3 px-4 text-muted fw-semibold text-end">Actions</th>}
+              {actions && <th scope="col" className="py-3 px-4 text-end">Actions</th>}
             </tr>
           </thead>
           <tbody>

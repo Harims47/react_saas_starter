@@ -13,7 +13,7 @@ export const EditPageTemplate = ({
   children,
 }) => {
   return (
-    <div className="container-fluid py-2" style={{ maxWidth: "800px" }}>
+    <div className="container-fluid py-2 px-0" style={{ maxWidth: "800px" }}>
       <div className="mb-4">
         <h2 className="h4 fw-bold mb-1 text-body">{title}</h2>
         {subtitle && <p className="text-muted small mb-0">{subtitle}</p>}
