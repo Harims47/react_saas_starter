@@ -1,16 +1,82 @@
-# React + Vite
+# Hari React SaaS Starter
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A reusable React SaaS starter kit built for rapid development of ERP, CRM, HRMS, Clinic Management, School ERP, Inventory Management and other business applications.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Frontend
 
-## React Compiler
+* React
+* Vite
+* Redux Toolkit
+* React Router DOM
+* Axios
+* Bootstrap 5
+* Bootstrap Icons
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Current Features
 
-## Expanding the Oxlint configuration
+### Authentication
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+* Login
+* Signup
+* Forgot Password
+* Reset Password
+
+### Architecture
+
+* Feature Based Structure
+* Redux Store
+* Axios API Layer
+* Theme System
+* Protected Routes
+* Public Routes
+* Dynamic Menu Configuration
+
+### UI Foundation
+
+* Auth Layout
+* Main Layout
+* Sidebar
+* Topbar
+* Responsive Design
+
+## Roadmap
+
+### Version 0.3
+
+* Component Library
+* AppButton
+* AppInput
+* AppCard
+* AppLoader
+
+### Version 0.4
+
+* AppTable
+* Pagination
+* Search
+* Sorting
+
+### Version 0.5
+
+* CRUD Templates
+* List Page Template
+* Create Page Template
+* Edit Page Template
+* Details Page Template
+
+### Version 1.0
+
+* Production Ready SaaS Starter Kit
+
+## Project Goal
+
+Build once and reuse across multiple SaaS products including:
+
+* School ERP
+* Clinic Management
+* CRM
+* HRMS
+* Inventory Management
+* Custom Business Applications
